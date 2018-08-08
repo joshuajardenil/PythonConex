@@ -4,17 +4,18 @@ import sys
 import time
 
 # Command Interface Stuff?
-print "Adding location of Newport.CONEXCC.CommandInterface.dll to sys.path"
-sys.path.append(r'C:\Program Files\Newport\MotionControl\CONEX-CC\Bin')
-sys.path.append(r'C:\Program Files (x86)\Newport\MotionControl\CONEX-CC\Bin')
-
-# .NET runtime stuff
-import clr
+print("Adding location of Newport.CONEXCC.CommandInterface.dll to sys.path")
+# sys.path.append(r"C:\\Program Files\\Newport\\MotionControl\\CONEX-CC\Bin")
+# sys.path.append(r'C:\\Program Files (x86)\\Newport\\MotionControl\\CONEX-CC\Bin')
 
 # Add reference to assembly and import names from namespace
-clr.AddReferenceToFile("Newport.CONEXCC.CommandInterface.dll")
-from CommandInterface import *
-import System
+# from CommandInterface import *
+# import System
+
+# .NET runtime stuff
+# import clr
+# clr.AddReferenceToFile("Newport.CONEXCC.CommandInterface.dll")
+
 
 
 
@@ -33,6 +34,9 @@ class PythonConex:
         
         self.instrumentKey = instrumentKey
         self.ret = CC.OpenInstrument(self.instrumentKey)
+
+    def move_absolute(self, positionToMoveTo):
+        CC.PA_Set(self.controllerAddress, positionToMoveTo)
 
     def move_repetitively(self, userIncrement, userStoppingValue, timeToSleep = 30):
         while (self.currentPosition + userIncrement) <= userStoppingValue:

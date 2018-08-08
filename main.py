@@ -2,5 +2,6 @@ from PythonConex import PythonConex
 
 # Main Function
 if __name__ == "__main__":
-    pythonConex = PythonConex()
-    pythonConex.execute()
+    instrumentKey = "COM25"
+    pythonConex = PythonConex(instrumentKey)
+    pythonConex.move_absolute(3.0)
